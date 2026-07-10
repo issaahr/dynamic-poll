@@ -1,1 +1,1 @@
-# dinamic-poll
+# dynamic-poll
