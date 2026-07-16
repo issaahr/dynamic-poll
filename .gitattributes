@@ -1,0 +1,19 @@
+# Texto
+* text=auto eol=lf
+
+# Shell
+*.sh text eol=lf
+
+# Windows
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Imagens
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.svg text
+
+# PDFs
+*.pdf binary
