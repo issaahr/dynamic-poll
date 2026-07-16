@@ -1,0 +1,44 @@
+services:
+  poll-api:
+    container_name: poll-api
+    build:
+      context: .
+      target: development
+    image: poll-api:dev
+    env_file:
+      - .env
+    ports:
+      - '${PORT:-3000}:3000'
+    volumes:
+      - .:/app
+      - /app/node_modules
+    command: npm run dev
+    depends_on:
+      poll-postgres:
+        condition: service_healthy
+    networks:
+      - poll-connect
+
+  poll-postgres:
+    container_name: poll-postgres
+    image: postgres:16-alpine
+    env_file:
+      - .env
+    ports:
+      - '${DB_PORT:-5432}:5432'
+    volumes:
+      - poll-postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U ${POSTGRES_USER}']
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - poll-connect
+
+networks:
+  poll-connect:
+    driver: bridge
+
+volumes:
+  poll-postgres-data:
