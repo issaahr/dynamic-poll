@@ -8,23 +8,35 @@
     "node": ">=20"
   },
   "scripts": {
-    "dev": "tsx watch src/index.ts",
-    "build": "tsc",
-    "start": "node dist/index.js",
+    "dev": "tsx watch src/app.ts",
+    "build": "prisma generate && tsc",
+    "start": "node dist/app.js",
     "test": "node --experimental-vm-modules node_modules/.bin/jest",
     "lint": "eslint .",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "prepare": "husky",
+    "postinstall": "prisma generate"
+  },
+  "lint-staged": {
+    "*.ts": [
+      "eslint --fix",
+      "prettier --write"
+    ]
   },
   "dependencies": {
+    "@prisma/client": "7.8.0",
     "compression": "1.8.1",
     "cors": "2.8.6",
     "dotenv": "17.4.2",
     "express": "5.2.1",
     "helmet": "8.3.0",
+    "pino": "10.3.1",
     "zod": "4.4.3"
   },
   "devDependencies": {
     "@eslint/js": "10.0.1",
+    "@types/compression": "1.8.1",
+    "@types/cors": "2.8.19",
     "@types/express": "5.0.6",
     "@types/jest": "30.0.0",
     "@types/node": "26.1.1",
@@ -35,6 +47,7 @@
     "jest": "30.0.0",
     "lint-staged": "17.0.8",
     "prettier": "3.9.5",
+    "prisma": "7.8.0",
     "ts-jest": "29.4.11",
     "tsx": "4.23.1",
     "typescript": "6.0.3",
