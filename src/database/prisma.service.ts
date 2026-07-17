@@ -1,5 +1,5 @@
+import { PrismaClient } from '@prisma/client';
 import { logger } from '../config/logger.js';
-import { PrismaClient } from '../generated/prisma/client.js';
 
 /**
  * Serviço responsável por gerenciar a instância única do PrismaClient.
